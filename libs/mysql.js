@@ -1,11 +1,9 @@
 const { Pool } = require('mysql');
 
-const pool = new Pool({
-  host: 'localhost',
-  port: 3306,
-  user: 'root',
-  password: 'secret',
-  database: 'films-manager'
-});
+const config = require('../config/config');
+
+const URI = `mysql://${config.dbUser}:${config.dbPassword}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
+
+const pool = new Pool({ connectionString: URI});
 
 module.exports = pool;

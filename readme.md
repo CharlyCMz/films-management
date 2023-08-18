@@ -96,3 +96,4 @@ incluir el nombre de la carpeta de DB dentro del git ignore
 Conexión node-mysql
 driver de npm
 
+npm i dotenv
