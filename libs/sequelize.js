@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
 
-const config = require('../config/config');
+const { config } = require('../config/config');
 const modelsSetUp = require('../models/index');
 
 const URI = `mysql://${config.dbUser}:${config.dbPassword}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
