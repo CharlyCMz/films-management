@@ -1,4 +1,4 @@
-# Prueba Backend - NodeJs
+# Films Management - NodeJs
 ## Project Introduction
 ### The Biz-Nation Technical Assessment
 In this test we aim to develop an API to explore the system given by knowing and modifying the characters that compose it and understanding which movies have participated. On the other hand, you will need to expose the information so that any frontend can consume it using a MVC model with REST structure.
@@ -70,3 +70,29 @@ With our main dependency installed, is just time to create a basic Express struc
     console.log("App running on port: " + port);
   });
 ```
+### Project Structure
+As the challenge mention, this app is an API which use REST verbs to comunicate with the client, thats why its going to be mixed with the solid principles and generate a layer model with the following sections:
+- **Routes**: containing the routing of the app and also the controlers with the REST verbs implementation. For this project the naming for the routing files will be `<entity>.router.js`.
+- **Services**: To establish the business logic and repositories interaction. For this project the naming for the service files will be `<entity>.service.js`.
+- **Middlewares**: Interceptors that allows the handling of special cases as global errors, auths and others. For this project the naming for the service files will be `<entity>.handler.js` adding a library called `Boom` to manage the error types and `Joi` to data schema validation.
+  ``` bash
+  $ npm i @hapi/boom
+  $ npm i joi
+  ```
+- 
+
+
+
+
+
+CORS Usage
+whitelis and options callback
+
+
+Docker
+cración del archivo docker-compose con mysql
+incluir el nombre de la carpeta de DB dentro del git ignore
+
+Conexión node-mysql
+driver de npm
+
