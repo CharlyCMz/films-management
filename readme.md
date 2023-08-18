@@ -97,3 +97,15 @@ Conexión node-mysql
 driver de npm
 
 npm i dotenv
+
+ORM
+Sequelize 
+npm i --save
+npm i drivers
+sequelize.js
+
+const [data, metadata] = sequelize.query(query);
+
+crear modelos
+conectarlos con sequelize y su archivo index
+
