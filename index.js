@@ -10,14 +10,16 @@ const app = express();
 
 app.use(express.json());
 
+routerApi(app);
+
 //=============================================================================================================
 // CORS Section to segment the scope of the API
 // include the common Ports for local apps
 const withelist = ['http://localhost:3000','http://localhost:4041'];
 // Set the options for a succesful/refused connection
 const options = {
-  origin: () => {
-    if (withelist.includes(origin)) {
+  origin: (origin, callback) => {
+    if (withelist.includes(origin) || !origin) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed connection. CORS Refused'));
@@ -26,8 +28,6 @@ const options = {
 }
 app.use(cors(options));
 //==============================================================================================================
-
-routerApi(app);
 
 app.use(errorLogger);
 app.use(ormErrorHandler);
