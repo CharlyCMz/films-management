@@ -35,7 +35,7 @@ class Gender extends Model {
       sequelize,
       tableName: GENDER_TABLE,
       modelName: 'Gender',
-      timeStamps: false
+      timestamps: false
     }
   }
 }

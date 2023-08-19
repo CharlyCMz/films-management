@@ -45,7 +45,7 @@ class Film extends Model {
       sequelize,
       tableName: FILM_TABLE,
       modelName: 'Film',
-      timeStamps: false
+      timestamps: false
     }
   }
 }

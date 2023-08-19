@@ -47,7 +47,7 @@ class Character extends Model {
       sequelize,
       tableName: CHARACTER_TABLE,
       modelName: 'Character',
-      timeStamps: false
+      timestamps: false
     }
   }
 }

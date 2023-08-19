@@ -1,10 +1,11 @@
 const express = require('express');
 const routerApi = require('./routes/index');
 
+const { config } = require('./config/config');
+
 const { errorLogger, errorHandler, boomErrorHandler } = require('./middlwares/error.handler');
 
 const app = express();
-const port = 3000;
 
 app.use(express.json());
 
@@ -18,6 +19,6 @@ app.get("/", (req, res) =>{
   res.send("Welcome to Disney Films Manager for BizNation");
 });
 
-app.listen(port, () =>{
-  console.log("App running on port: " + port);
+app.listen(config.port, () =>{
+  console.log("App running on port: " + config.port);
 });
