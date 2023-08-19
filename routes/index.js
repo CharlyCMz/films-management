@@ -1,7 +1,7 @@
 const express = require("express");
 
-const characterRouter = require('./genders.router');
-const filmsRouter = require('./genders.router');
+const characterRouter = require('./characters.router');
+const filmsRouter = require('./films.router');
 const genderRouter = require('./genders.router');
 
 function routerApi(app) {
