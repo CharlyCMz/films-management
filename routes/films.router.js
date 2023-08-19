@@ -3,7 +3,7 @@ const router = express.Router();
 
 const FilmService = require('./../services/films.service');
 const validationHandler = require('./../middlwares/validation.handler');
-const { createFilmSchema, updateFilmSchema, getFilmSchema} = require('../schemas/film.schema');
+const { createFilmSchema, updateFilmSchema, getFilmSchema, addCharacterToFilmSchema} = require('../schemas/film.schema');
 
 const filmService = new FilmService();
 
@@ -39,6 +39,19 @@ router.post(
     try {
       const createdFilm = await filmService.create(req.body);
       res.status(201).json(createdFilm);
+    } catch (error) {
+      next(error);
+    }
+});
+
+// Addition of characters to a Film
+router.post(
+  '/add-character',
+  validationHandler(addCharacterToFilmSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const newCharacter = await filmService.addCharacter(req.body);
+      res.status(201).json(newCharacter);
     } catch (error) {
       next(error);
     }

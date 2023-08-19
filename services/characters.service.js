@@ -11,7 +11,9 @@ class CharacterService {
   }
 
   async findOne(id) {
-    const character = await models.Character.findByPk(id);
+    const character = await models.Character.findByPk(id, {
+      include: ['films']
+    });
     if (!character) {
       throw boom.notFound('That Character was not found')
     }

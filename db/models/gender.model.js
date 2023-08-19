@@ -24,7 +24,7 @@ class Gender extends Model {
   static associate(models) {
     this.hasMany(models.Film, {
       as: 'films',
-      foreignKey: 'categoryId'
+      foreignKey: 'genderId'
     })
   }
 

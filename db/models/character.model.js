@@ -34,6 +34,7 @@ const CharacterSchema = {
 class Character extends Model {
   static associate(models) {
     this.belongsToMany(models.Film, {
+      as: 'films',
       through: models.CharacterFilm,
       foreignKey: 'filmId',
       otherKey: 'characterId'

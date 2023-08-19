@@ -7,11 +7,15 @@ class FilmService {
   constructor() {}
 
   async find() {
-    return await models.Film.findAll();
+    return await models.Film.findAll({
+      include: ['gender']
+    });
   }
 
   async findOne(id) {
-    const film = await models.Film.findByPk(id);
+    const film = await models.Film.findByPk(id, {
+      include: ['gender', 'characters']
+    });
     if (!film) {
       throw boom.notFound('That film was not found')
     }
@@ -21,6 +25,11 @@ class FilmService {
   async create(payload) {
     const newfilm = await models.Film.create(payload);
     return newfilm;
+  }
+
+  async addCharacter(payload) {
+    const newCharacter = await models.CharacterFilm.create(payload);
+    return newCharacter;
   }
 
   async update(id, payload) {

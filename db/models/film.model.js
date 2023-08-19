@@ -46,6 +46,7 @@ class Film extends Model {
   static associate(models) {
     this.belongsTo(models.Gender, { as: 'gender' });
     this.belongsToMany(models.Character, {
+      as: 'characters',
       through: models.CharacterFilm,
       foreignKey: 'characterId',
       otherKey: 'filmId'

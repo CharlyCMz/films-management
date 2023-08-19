@@ -11,7 +11,9 @@ class GenderService {
   }
 
   async findOne(id) {
-    const gender = await models.Gender.findByPk(id);
+    const gender = await models.Gender.findByPk(id, {
+      include: ['films']
+    });
     if (!gender) {
       throw boom.notFound('That gender was not found')
     }

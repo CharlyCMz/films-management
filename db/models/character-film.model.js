@@ -35,7 +35,7 @@ const CharacterFilmSchema = {
 }
 
 class CharacterFilm extends Model {
-  static associate() {
+  static associate(models) {
     //Relations for the entity
   }
 
