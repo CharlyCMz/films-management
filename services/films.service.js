@@ -6,10 +6,14 @@ class FilmService {
 
   constructor() {}
 
-  async find() {
-    return await models.Film.findAll({
-      include: ['gender']
-    });
+  async find(query) {
+    const options = {};
+    const { limit, offset } = query;
+    if (limit & offset) {
+      options.limit = limit;
+      options.offset = offset;
+    }
+    return await models.Film.findAll(options);
   }
 
   async findOne(id) {

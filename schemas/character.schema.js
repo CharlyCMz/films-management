@@ -8,6 +8,9 @@ const age = Joi.number().integer();
 const weight = Joi.number().integer();
 const backstory = Joi.string().max(500);
 
+const limit = Joi.number().integer();
+const offset = Joi.number().integer();
+
 //Declare Schemas for Creation, Update, Get or others needed
 const createCharacterSchema = Joi.object({
   image: image.required(),
@@ -29,5 +32,10 @@ const getCharacterSchema = Joi.object({
   id: id.required()
 });
 
+const queryCharacterSchema = Joi.object({
+  limit,
+  offset
+});
+
 // Export the schemas
-module.exports = { createCharacterSchema, updateCharacterSchema, getCharacterSchema }
+module.exports = { createCharacterSchema, updateCharacterSchema, getCharacterSchema, queryCharacterSchema }

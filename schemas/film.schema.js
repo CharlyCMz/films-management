@@ -9,6 +9,9 @@ const genderId = Joi.number().integer();
 const filmId = Joi.number().integer();
 const characterId = Joi.number().integer();
 
+const limit = Joi.number().integer();
+const offset = Joi.number().integer();
+
 //Declare Schemas for Creation, Update, Get or others needed
 const createFilmSchema = Joi.object({
   image: image.required(),
@@ -28,11 +31,22 @@ const getFilmSchema = Joi.object({
   id: id.required()
 });
 
-//
+const queryFilmSchema = Joi.object({
+  limit,
+  offset
+});
+
+//Schema to character addition for N-N relation
 const addCharacterToFilmSchema = Joi.object({
   filmId: filmId.required(),
   characterId: characterId.required(),
 });
 
 // Export the schemas
-module.exports = { createFilmSchema, updateFilmSchema, getFilmSchema, addCharacterToFilmSchema }
+module.exports = {
+  createFilmSchema,
+  updateFilmSchema,
+  getFilmSchema,
+  addCharacterToFilmSchema,
+  queryFilmSchema
+}

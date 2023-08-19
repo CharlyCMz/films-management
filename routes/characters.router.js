@@ -3,14 +3,22 @@ const router = express.Router();
 
 const CharacterService = require('./../services/characters.service');
 const validationHandler = require('./../middlwares/validation.handler');
-const { createCharacterSchema, updateCharacterSchema, getCharacterSchema} = require('../schemas/character.schema');
+const {
+  createCharacterSchema,
+  updateCharacterSchema,
+  getCharacterSchema,
+  queryCharacterSchema
+} = require('../schemas/character.schema');
 
 const characterService = new CharacterService();
 
 // GetAll
-router.get('/', async (req, res, next) => {
+router.get(
+  '/',
+  validationHandler(queryCharacterSchema, 'query'),
+  async (req, res, next) => {
   try {
-    const characters = await characterService.find();
+    const characters = await characterService.find(req.query);
     res.status(200).json(characters);
   } catch (error) {
     next(error);

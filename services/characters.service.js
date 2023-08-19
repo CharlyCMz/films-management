@@ -6,8 +6,14 @@ class CharacterService {
 
   constructor() {}
 
-  async find() {
-    return await models.Character.findAll();
+  async find(query) {
+    const options = {};
+    const { limit, offset } = query;
+    if (limit & offset) {
+      options.limit = limit;
+      options.offset = offset;
+    }
+    return await models.Character.findAll(options);
   }
 
   async findOne(id) {
