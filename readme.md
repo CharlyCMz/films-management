@@ -8,6 +8,7 @@ In this test we aim to develop an API to explore the system given by knowing and
 - **Documentation**: Swagger
 - **Auth Methodology**: JWT
 - **Platform**: Docker (App & DB)
+### Project Index
 
 ## Entity Relation Diagram
 <div style="width: 70%; margin: 0 auto;">
