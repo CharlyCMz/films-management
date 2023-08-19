@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const boom = require('@hapi/boom');
 
 const { models } = require('../libs/sequelize');
@@ -7,11 +8,25 @@ class FilmService {
   constructor() {}
 
   async find(query) {
-    const options = {};
-    const { limit, offset } = query;
+    const options = {
+      attributes: ['image', 'title', 'release_date'],
+      where: {}
+    };
+    const { limit, offset, name, genre, order } = query;
     if (limit & offset) {
       options.limit = limit;
       options.offset = offset;
+    }
+    if (name) {
+      options.where.title = {
+        [Op.substring]: name
+      };
+    }
+    if (genre) {
+      options.where.genderId = genre;
+    }
+    if (order) {
+      options.order = ['release_date', order];
     }
     return await models.Film.findAll(options);
   }

@@ -8,7 +8,7 @@ function routerApi(app) {
   const router = express.Router();
   app.use('/api/v1', router);
   router.use('/characters', characterRouter);
-  router.use('/films', filmsRouter);
+  router.use('/movies', filmsRouter);
   router.use('/genders', genderRouter);
 }
 

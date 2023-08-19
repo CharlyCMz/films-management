@@ -11,6 +11,9 @@ const characterId = Joi.number().integer();
 
 const limit = Joi.number().integer();
 const offset = Joi.number().integer();
+const name = Joi.string();
+const genre = Joi.number().integer();
+const order = Joi.string().valid('ASC','DESC');
 
 //Declare Schemas for Creation, Update, Get or others needed
 const createFilmSchema = Joi.object({
@@ -33,7 +36,10 @@ const getFilmSchema = Joi.object({
 
 const queryFilmSchema = Joi.object({
   limit,
-  offset
+  offset,
+  name,
+  genre,
+  order
 });
 
 //Schema to character addition for N-N relation
