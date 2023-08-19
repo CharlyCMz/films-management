@@ -1,17 +1,45 @@
+const { Op } = require('sequelize');
 const boom = require('@hapi/boom');
 
 const { models } = require('../libs/sequelize');
+const { Film } = require('../db/models/film.model');
 
 class CharacterService {
 
   constructor() {}
 
   async find(query) {
-    const options = {};
-    const { limit, offset } = query;
+    const options = {
+      attributes: ['image', 'name'],
+      where: {}
+    };
+    const { limit, offset, name, age, weightMin, weightMax, movie } = query;
     if (limit & offset) {
       options.limit = limit;
       options.offset = offset;
+    }
+    if (name) {
+      options.where.name = {
+        [Op.substring]: name
+      };
+    }
+    if (movie) {
+      options.include =  {
+        model: Film,
+        as: 'films',
+        where: {
+          id: movie
+        }
+      }
+    }
+    if (age) {
+      options.where.age = movie;
+    }
+    if (weightMin & weightMax) {
+      options.where.weight = {
+        [Op.gte]: weightMin,
+        [Op.lte]: weightMax
+      };
     }
     return await models.Character.findAll(options);
   }

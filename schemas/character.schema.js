@@ -10,6 +10,9 @@ const backstory = Joi.string().max(500);
 
 const limit = Joi.number().integer();
 const offset = Joi.number().integer();
+const weightMin = Joi.number().min(0);
+const weightMax = Joi.number().max(800);
+const movie = Joi.number().integer();
 
 //Declare Schemas for Creation, Update, Get or others needed
 const createCharacterSchema = Joi.object({
@@ -34,7 +37,15 @@ const getCharacterSchema = Joi.object({
 
 const queryCharacterSchema = Joi.object({
   limit,
-  offset
+  offset,
+  name,
+  age,
+  weightMin,
+  weightMax: weightMax.when('weightMin', {
+    is: Joi.number().integer().required(),
+    then: Joi.required(),
+  }),
+  movie
 });
 
 // Export the schemas
