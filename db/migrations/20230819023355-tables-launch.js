@@ -13,11 +13,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('CHARACTER_TABLE');
-     */
+    await queryInterface.dropTable(CHARACTER_TABLE);
   }
 };

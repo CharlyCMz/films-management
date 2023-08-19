@@ -1,4 +1,4 @@
-const { Model, DataTypes, Sequelize} = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 
 const CHARACTER_TABLE = 'characters';
 
@@ -32,8 +32,12 @@ const CharacterSchema = {
 }
 
 class Character extends Model {
-  static associate() {
-    //Relations for the entity
+  static associate(models) {
+    this.belongsToMany(models.Film, {
+      through: models.CharacterFilm,
+      foreignKey: 'filmId',
+      otherKey: 'characterId'
+    });
   }
 
   static config(sequelize) {

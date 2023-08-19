@@ -44,7 +44,12 @@ const FilmSchema = {
 
 class Film extends Model {
   static associate(models) {
-    this.belongsTo(models.Gender, { as: 'gender' })
+    this.belongsTo(models.Gender, { as: 'gender' });
+    this.belongsToMany(models.Character, {
+      through: models.CharacterFilm,
+      foreignKey: 'characterId',
+      otherKey: 'filmId'
+    });
   }
 
   static config(sequelize) {
