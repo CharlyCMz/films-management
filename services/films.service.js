@@ -25,11 +25,17 @@ class FilmService {
 
   async update(id, payload) {
     const film = this.findOne(id);
+    if (!film) {
+      throw boom.notFound('That film was not found')
+    }
     return await film.update(payload);
   }
 
   async delete(id) {
     const film = this.findOne(id);
+    if (!film) {
+      throw boom.notFound('That film was not found')
+    }
     return await film.destroy();
   }
 }

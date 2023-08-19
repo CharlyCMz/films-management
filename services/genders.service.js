@@ -25,11 +25,17 @@ class GenderService {
 
   async update(id, payload) {
     const gender = this.findOne(id);
+    if (!gender) {
+      throw boom.notFound('That gender was not found')
+    }
     return await gender.update(payload);
   }
 
   async delete(id) {
     const gender = this.findOne(id);
+    if (!gender) {
+      throw boom.notFound('That gender was not found')
+    }
     return await gender.destroy();
   }
 }

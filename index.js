@@ -9,12 +9,12 @@ const app = express();
 
 app.use(express.json());
 
+routerApi(app);
+
 app.use(errorLogger);
 app.use(ormErrorHandler);
 app.use(boomErrorHandler);
 app.use(errorHandler);
-
-routerApi(app);
 
 app.get("/", (req, res) =>{
   res.send("Welcome to Disney Films Manager for BizNation");

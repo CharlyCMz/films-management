@@ -25,11 +25,17 @@ class CharacterService {
 
   async update(id, payload) {
     const character = this.findOne(id);
+    if (!character) {
+      throw boom.notFound('That Character was not found')
+    }
     return await character.update(payload);
   }
 
   async delete(id) {
     const character = this.findOne(id);
+    if (!character) {
+      throw boom.notFound('That Character was not found')
+    }
     return await character.destroy();
   }
 }

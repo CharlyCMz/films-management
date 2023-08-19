@@ -1,32 +1,73 @@
 const express = require("express");
 const router = express.Router();
 
-//GetAll
-router.get('/', (req, res) => {
-  res.status().json();
+const FilmService = require('./../services/films.service');
+
+const filmService = new FilmService();
+
+// GetAll
+router.get('/', async (req, res, next) => {
+  try {
+    const films = await filmService.find();
+    res.status(200).json(films);
+  } catch (error) {
+    next(error);
+  }
 });
 
-//GetById
-router.get('/:id', (req, res) => {
-  res.status().json();
+// GetById
+router.get('/:id', async (req, res, next) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+    const film = await filmService.findOne(id);
+    res.status(200).json(film);
+  } catch (error) {
+    next(error);
+  }
 });
 
-router.post('/', (req, res) => {
-  res.status().json();
+// Create Entity
+router.post('/', async (req, res, next) => {
+  try {
+    const createdFilm = await filmService.create(req.body);
+    res.status(201).json(createdFilm);
+  } catch (error) {
+    next(error);
+  }
 });
 
-//Complete Update
-router.put('/:id', (req, res) => {
-  res.status().json();
+// Complete Update
+router.put('/:id', async (req, res, next) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+    const updatedFilm = await filmService.update(id, req.body);
+    res.status(200).json(updatedFilm);
+  } catch (error) {
+    next(error);
+  }
 });
 
-//Partial Update
-router.patch('/:id', (req, res) => {
-  res.status().json();
+// Partial Update
+router.patch('/:id', async (req, res, next) => {
+
+  try {
+    const id = parseInt(req.params.id, 10);
+    const updatedFilm = await filmService.update(id, req.body);
+    res.status(200).json(updatedFilm);
+  } catch (error) {
+    next(error);
+  }
 });
 
-router.delete('/:id', (req, res) => {
-  res.status().json();
+// Delete
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+    await filmService.delete(id);
+    res.status(204).send();
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;
