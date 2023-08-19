@@ -28,12 +28,6 @@ const CharacterSchema = {
   backstory:  {
     allowNull: false,
     type: DataTypes.STRING
-  },
-  createdAt: {
-    allowNull: false,
-    type: DataTypes.DATE,
-    field: 'created_at',
-    defaultValue: Sequelize.NOW
   }
 }
 
@@ -47,7 +41,9 @@ class Character extends Model {
       sequelize,
       tableName: CHARACTER_TABLE,
       modelName: 'Character',
-      timestamps: false
+      timestamps: true,
+      createdAt: 'created_at',
+      updatedAt: 'updated_at'
     }
   }
 }

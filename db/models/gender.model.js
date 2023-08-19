@@ -16,12 +16,6 @@ const GenderSchema = {
   name:  {
     allowNull: false,
     type: DataTypes.STRING
-  },
-  createdAt: {
-    allowNull: false,
-    type: DataTypes.DATE,
-    field: 'created_at',
-    defaultValue: Sequelize.NOW
   }
 }
 
@@ -35,7 +29,9 @@ class Gender extends Model {
       sequelize,
       tableName: GENDER_TABLE,
       modelName: 'Gender',
-      timestamps: false
+      timestamps: true,
+      createdAt: 'created_at',
+      updatedAt: 'updated_at'
     }
   }
 }

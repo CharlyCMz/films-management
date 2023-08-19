@@ -17,8 +17,6 @@ try {
 
   setupModels(sequelize);
 
-  sequelize.sync();
-
 } catch (error) {
   console.error('Error connecting to the database:', error.message);
 }

@@ -26,12 +26,6 @@ const FilmSchema = {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'release_date'
-  },
-  createdAt: {
-    allowNull: false,
-    type: DataTypes.DATE,
-    field: 'created_at',
-    defaultValue: Sequelize.NOW
   }
 }
 
@@ -45,7 +39,9 @@ class Film extends Model {
       sequelize,
       tableName: FILM_TABLE,
       modelName: 'Film',
-      timestamps: false
+      timestamps: true,
+      createdAt: 'created_at',
+      updatedAt: 'updated_at'
     }
   }
 }
