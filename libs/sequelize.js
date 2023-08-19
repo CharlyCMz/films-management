@@ -7,18 +7,13 @@ const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
 const URI = `mysql://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
 
-try {
-  const sequelize = new Sequelize(URI, {
-    dialect: 'mysql',
-    logging: (msg)=> {
-      console.log("Sequelize Info: ", msg)
-    },
-  })
+const sequelize = new Sequelize(URI, {
+  dialect: 'mysql',
+  logging: (msg)=> {
+    console.log("Sequelize Info: ", msg)
+  },
+})
 
-  setupModels(sequelize);
-
-} catch (error) {
-  console.error('Error connecting to the database:', error.message);
-}
+setupModels(sequelize);
 
 module.exports = sequelize;

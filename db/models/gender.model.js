@@ -1,4 +1,4 @@
-const { Model, DataTypes, Sequelize} = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 
 const GENDER_TABLE = 'genders';
 
@@ -15,13 +15,17 @@ const GenderSchema = {
   },
   name:  {
     allowNull: false,
+    unique: true,
     type: DataTypes.STRING
   }
 }
 
 class Gender extends Model {
-  static associate() {
-    //Relations for the entity
+  static associate(models) {
+    this.hasMany(models.Film, {
+      as: 'films',
+      foreignKey: 'categoryId'
+    })
   }
 
   static config(sequelize) {

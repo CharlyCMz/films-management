@@ -1,4 +1,6 @@
-const { Model, DataTypes, Sequelize} = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
+
+const { GENDER_TABLE } =require('./gender.model');
 
 const FILM_TABLE = 'films';
 
@@ -26,12 +28,23 @@ const FilmSchema = {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'release_date'
+  },
+  genderId: {
+    field: 'gender_id',
+    allowNull: true,
+    type: DataTypes.INTEGER,
+    references: {
+      model: GENDER_TABLE,
+      key: 'id'
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL'
   }
 }
 
 class Film extends Model {
-  static associate() {
-    //Relations for the entity
+  static associate(models) {
+    this.belongsTo(models.Gender, { as: 'gender' })
   }
 
   static config(sequelize) {
