@@ -9,7 +9,7 @@ try {
   const sequelize = new Sequelize(URI, {
     dialect: 'mysql',
     logging: (msg)=> {
-      console.log("INFO: ", msg)
+      console.log("Sequelize Info: ", msg)
     },
   })
 
