@@ -18,57 +18,74 @@ router.get('/', async (req, res, next) => {
 });
 
 // GetById
-router.get('/:id', validationHandler(getCharacterSchema, 'params'),async (req, res, next) => {
-  try {
-    const id = parseInt(req.params.id, 10);
-    const character = await characterService.findOne(id);
-    res.status(200).json(character);
-  } catch (error) {
-    next(error);
-  }
+router.get(
+  '/:id',
+  validationHandler(getCharacterSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const id = parseInt(req.params.id, 10);
+      const character = await characterService.findOne(id);
+      res.status(200).json(character);
+    } catch (error) {
+      next(error);
+    }
 });
 
 // Create Entity
-router.post('/', validationHandler(createCharacterSchema, 'body'), async (req, res, next) => {
-  try {
-    const createdCharacter = await characterService.create(req.body);
-    res.status(201).json(createdCharacter);
-  } catch (error) {
-    next(error);
-  }
+router.post(
+  '/',
+  validationHandler(createCharacterSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const createdCharacter = await characterService.create(req.body);
+      res.status(201).json(createdCharacter);
+    } catch (error) {
+      next(error);
+    }
 });
 
 // Complete Update
-router.put('/:id', validationHandler(updateCharacterSchema, 'body'), async (req, res, next) => {
-  try {
-    const id = parseInt(req.params.id, 10);
-    const updatedCharacter = await characterService.update(id, req.body);
-    res.status(200).json(updatedCharacter);
-  } catch (error) {
-    next(error);
-  }
+router.put(
+  '/:id',
+  validationHandler(getCharacterSchema, 'params'),
+  validationHandler(updateCharacterSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const id = parseInt(req.params.id, 10);
+      const updatedCharacter = await characterService.update(id, req.body);
+      res.status(200).json(updatedCharacter);
+    } catch (error) {
+      next(error);
+    }
 });
 
 // Partial Update
-router.patch('/:id', validationHandler(updateCharacterSchema, 'body'), async (req, res, next) => {
-  try {
-    const id = parseInt(req.params.id, 10);
-    const updatedCharacter = await characterService.update(id, req.body);
-    res.status(200).json(updatedCharacter);
-  } catch (error) {
-    next(error);
-  }
+router.patch(
+  '/:id',
+  validationHandler(getCharacterSchema, 'params'),
+  validationHandler(updateCharacterSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const id = parseInt(req.params.id, 10);
+      const updatedCharacter = await characterService.update(id, req.body);
+      res.status(200).json(updatedCharacter);
+    } catch (error) {
+      next(error);
+    }
 });
 
 // Delete
-router.delete('/:id', async (req, res, next) => {
-  try {
-    const id = parseInt(req.params.id, 10);
-    await characterService.delete(id);
-    res.status(204).send(); // No Content
-  } catch (error) {
-    next(error);
-  }
+router.delete(
+  '/:id',
+  validationHandler(getCharacterSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const id = parseInt(req.params.id, 10);
+      await characterService.delete(id);
+      res.status(204).send(); // No Content
+    } catch (error) {
+      next(error);
+    }
 });
 
 module.exports = router;
