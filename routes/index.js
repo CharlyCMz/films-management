@@ -1,5 +1,6 @@
 const express = require("express");
 
+const loginRouter = require('./login.router');
 const characterRouter = require('./characters.router');
 const filmsRouter = require('./films.router');
 const genderRouter = require('./genders.router');
@@ -8,6 +9,7 @@ const userRouter = require('./users.router');
 function routerApi(app) {
   const router = express.Router();
   app.use('/api/v1', router);
+  router.use('/auth', loginRouter);
   router.use('/characters', characterRouter);
   router.use('/movies', filmsRouter);
   router.use('/genders', genderRouter);

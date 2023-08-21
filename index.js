@@ -29,6 +29,9 @@ const options = {
 app.use(cors(options));
 //==============================================================================================================
 
+//Auth Index Execution
+require('./utils/auth');
+
 app.use(errorLogger);
 app.use(ormErrorHandler);
 app.use(boomErrorHandler);

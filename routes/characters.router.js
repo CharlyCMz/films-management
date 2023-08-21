@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const passport = require('passport');
 
 const CharacterService = require('./../services/characters.service');
 const validationHandler = require('./../middlwares/validation.handler');
@@ -28,6 +29,7 @@ router.get(
 // GetById
 router.get(
   '/:id',
+  passport.authenticate('jwt', {session: false}),
   validationHandler(getCharacterSchema, 'params'),
   async (req, res, next) => {
     try {
@@ -42,6 +44,7 @@ router.get(
 // Create Entity
 router.post(
   '/',
+  passport.authenticate('jwt', {session: false}),
   validationHandler(createCharacterSchema, 'body'),
   async (req, res, next) => {
     try {
@@ -55,6 +58,7 @@ router.post(
 // Complete Update
 router.put(
   '/:id',
+  passport.authenticate('jwt', {session: false}),
   validationHandler(getCharacterSchema, 'params'),
   validationHandler(updateCharacterSchema, 'body'),
   async (req, res, next) => {
@@ -70,6 +74,7 @@ router.put(
 // Partial Update
 router.patch(
   '/:id',
+  passport.authenticate('jwt', {session: false}),
   validationHandler(getCharacterSchema, 'params'),
   validationHandler(updateCharacterSchema, 'body'),
   async (req, res, next) => {
@@ -85,6 +90,7 @@ router.patch(
 // Delete
 router.delete(
   '/:id',
+  passport.authenticate('jwt', {session: false}),
   validationHandler(getCharacterSchema, 'params'),
   async (req, res, next) => {
     try {

@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const passport = require('passport');
 
 const FilmService = require('./../services/films.service');
 const validationHandler = require('./../middlwares/validation.handler');
@@ -29,6 +30,7 @@ router.get(
 // GetById
 router.get(
   '/:id',
+  passport.authenticate('jwt', {session: false}),
   validationHandler(getFilmSchema, 'params'),
   async (req, res, next) => {
     try {
@@ -43,6 +45,7 @@ router.get(
 // Create Entity
 router.post(
   '/',
+  passport.authenticate('jwt', {session: false}),
   validationHandler(createFilmSchema, 'body'),
   async (req, res, next) => {
     try {
@@ -56,6 +59,7 @@ router.post(
 // Addition of characters to a Film
 router.post(
   '/add-character',
+  passport.authenticate('jwt', {session: false}),
   validationHandler(addCharacterToFilmSchema, 'body'),
   async (req, res, next) => {
     try {
@@ -69,6 +73,7 @@ router.post(
 // Complete Update
 router.put(
   '/:id',
+  passport.authenticate('jwt', {session: false}),
   validationHandler(getFilmSchema, 'params'),
   validationHandler(updateFilmSchema, 'body'),
   async (req, res, next) => {
@@ -84,6 +89,7 @@ router.put(
 // Partial Update
 router.patch(
   '/:id',
+  passport.authenticate('jwt', {session: false}),
   validationHandler(getFilmSchema, 'params'),
   validationHandler(updateFilmSchema, 'body'),
   async (req, res, next) => {
@@ -99,6 +105,7 @@ router.patch(
 // Delete
 router.delete(
   '/:id',
+  passport.authenticate('jwt', {session: false}),
   validationHandler(getFilmSchema, 'params'),
   async (req, res, next) => {
     try {

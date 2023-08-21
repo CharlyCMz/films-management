@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const passport = require('passport');
 
 const GenderService = require('./../services/genders.service');
 const validationHandler = require('./../middlwares/validation.handler');
@@ -34,6 +35,7 @@ router.get(
 // Create Entity
 router.post(
   '/',
+  passport.authenticate('jwt', {session: false}),
   validationHandler(createGenderSchema, 'body'),
   async (req, res, next) => {
   try {
@@ -47,6 +49,7 @@ router.post(
 // Complete Update
 router.put(
   '/:id',
+  passport.authenticate('jwt', {session: false}),
   validationHandler(getGenderSchema, 'params'),
   validationHandler(updateGenderSchema, 'body'),
   async (req, res, next) => {
@@ -62,6 +65,7 @@ router.put(
 // Partial Update
 router.patch(
   '/:id',
+  passport.authenticate('jwt', {session: false}),
   validationHandler(getGenderSchema, 'params'),
   validationHandler(updateGenderSchema, 'body'),
   async (req, res, next) => {
@@ -77,6 +81,7 @@ router.patch(
 // Delete
 router.delete(
   '/:id',
+  passport.authenticate('jwt', {session: false}),
   validationHandler(getGenderSchema, 'params'),
   async (req, res, next) => {
     try {

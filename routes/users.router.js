@@ -1,25 +1,30 @@
 const express = require("express");
 const router = express.Router();
+const passport = require('passport');
 
 const UserService = require('./../services/users.service');
 const validationHandler = require('./../middlwares/validation.handler');
-const { createUserSchema, updateUserSchema, getUserSchema} = require('../schemas/user.schema');
+const { updateUserSchema, getUserSchema} = require('../schemas/user.schema');
 
 const userService = new UserService();
 
 // GetAll
-router.get('/', async (req, res, next) => {
-  try {
-    const users = await userService.find();
-    res.status(200).json(users);
-  } catch (error) {
-    next(error);
-  }
+router.get(
+  '/',
+  passport.authenticate('jwt', {session: false}),
+  async (req, res, next) => {
+    try {
+      const users = await userService.find();
+      res.status(200).json(users);
+    } catch (error) {
+      next(error);
+    }
 });
 
 // GetById
 router.get(
   '/:id',
+  passport.authenticate('jwt', {session: false}),
   validationHandler(getUserSchema, 'params'),
   async (req, res, next) => {
     try {
@@ -31,22 +36,23 @@ router.get(
     }
 });
 
-// Create Entity
-router.post(
-  '/',
-  validationHandler(createUserSchema, 'body'),
-  async (req, res, next) => {
-  try {
-    const createdUser = await userService.create(req.body);
-    res.status(201).json(createdUser);
-  } catch (error) {
-    next(error);
-  }
-});
+// Create Entity - Migrate to Auth/Register to create a new User
+// router.post(
+//   '/',
+//   validationHandler(createUserSchema, 'body'),
+//   async (req, res, next) => {
+//   try {
+//     const createdUser = await userService.create(req.body);
+//     res.status(201).json(createdUser);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 // Complete Update
 router.put(
   '/:id',
+  passport.authenticate('jwt', {session: false}),
   validationHandler(getUserSchema, 'params'),
   validationHandler(updateUserSchema, 'body'),
   async (req, res, next) => {
@@ -62,6 +68,7 @@ router.put(
 // Partial Update
 router.patch(
   '/:id',
+  passport.authenticate('jwt', {session: false}),
   validationHandler(getUserSchema, 'params'),
   validationHandler(updateUserSchema, 'body'),
   async (req, res, next) => {
@@ -77,6 +84,7 @@ router.patch(
 // Delete
 router.delete(
   '/:id',
+  passport.authenticate('jwt', {session: false}),
   validationHandler(getUserSchema, 'params'),
   async (req, res, next) => {
     try {
