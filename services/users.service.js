@@ -1,5 +1,6 @@
 const boom = require('@hapi/boom');
 const bcrypt = require('bcrypt');
+const filmsAppMailer = require('../utils/mailer/mailer');
 
 const { models } = require('../libs/sequelize');
 
@@ -33,6 +34,7 @@ class UserService {
       password: hashPassword
     });
     delete newUser.dataValues.password;
+    await filmsAppMailer(newUser.email);
     return newUser;
   }
 
