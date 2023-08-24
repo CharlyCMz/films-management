@@ -12,7 +12,7 @@ const router = express.Router();
 
 const userService = new UserService();
 
-router.get(
+router.post(
   '/login',
   passport.authenticate('local', {session: false}),
   async (req, res, next) => {
@@ -21,8 +21,8 @@ router.get(
         sub: req.user.id,
         role: 'user'
       }
-      const token = jwt.sign(tokenPayload, config.jwtKey)
-      res.json(req.user, token);
+      const token = jwt.sign(tokenPayload, config.jwtKey);
+      res.status(200).json({user: req.user, token:token});
     } catch (error) {
       next(error);
     }
