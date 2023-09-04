@@ -5,7 +5,6 @@ In this test we aim to develop an API to explore the system given by knowing and
 ### Technologies
 - **Database**: MySQL
 - **BackEnd**: NodeJs with Express(Framework) + Sequelize(ORM)
-- **Documentation**: Swagger
 - **Auth Methodology**: JWT
 - **Platform**: Docker (App & DB)
 ### Project Index
