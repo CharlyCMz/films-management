@@ -48,8 +48,8 @@ class Film extends Model {
     this.belongsToMany(models.Character, {
       as: 'characters',
       through: models.CharacterFilm,
-      foreignKey: 'characterId',
-      otherKey: 'filmId'
+      foreignKey: 'filmId',
+      otherKey: 'characterId'
     });
   }
 
