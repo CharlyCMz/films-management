@@ -35,7 +35,7 @@ const CharacterFilmSchema = {
 }
 
 class CharacterFilm extends Model {
-  static associate(models) {
+  static associate() {
     //Relations for the entity
   }
 
@@ -44,9 +44,7 @@ class CharacterFilm extends Model {
       sequelize,
       tableName: CHARACTER_FILM_TABLE,
       modelName: 'CharacterFilm',
-      timestamps: true,
-      createdAt: 'created_at',
-      updatedAt: 'updated_at'
+      timestamps: false
     }
   }
 }

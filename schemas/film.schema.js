@@ -5,6 +5,8 @@ const id = Joi.number().integer();
 const image = Joi.string().uri();
 const title = Joi.string().min(3);
 const score = Joi.number().integer();
+const releaseDate = Joi.date().iso();
+
 const genderId = Joi.number().integer();
 const filmId = Joi.number().integer();
 const characterId = Joi.number().integer();
@@ -20,6 +22,7 @@ const createFilmSchema = Joi.object({
   image: image.required(),
   title: title.required(),
   score: score.required(),
+  releaseDate: releaseDate.required(),
   genderId: genderId.required()
 });
 
@@ -27,6 +30,7 @@ const updateFilmSchema = Joi.object({
   image: image,
   title: title,
   score: score,
+  releaseDate: releaseDate,
   genderId: genderId
 });
 
